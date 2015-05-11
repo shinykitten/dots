@@ -3,19 +3,22 @@ autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
 " Sanity
 set nocompatible
+set nobackup
 set showcmd
 set t_Co=255
+set vb t_vb=  " Disable beeping
 
 " Syntax highlighting
 filetype on
 filetype plugin on
 syntax enable
 syntax on
+set showmatch
 
 " Indenting
-set autoindent
+set autoindent  " Extends the current indent
+set smartindent  " Predict the correct indent based on syntax
 set expandtab
-set smarttab
 set shiftwidth=2
 set softtabstop=2
 
@@ -40,3 +43,10 @@ highlight Visual       ctermbg=3   ctermfg=0
 highlight Pmenu        ctermbg=240 ctermfg=12
 highlight PmenuSel     ctermbg=0   ctermfg=3
 highlight SpellBad     ctermbg=0   ctermfg=1
+
+" Set tabs to 4 for java
+autocmd BufRead,BufNewFile *.java call SetJavaOptions()
+function SetJavaOptions()
+  set shiftwidth=4
+  set softtabstop=4
+endfunction
